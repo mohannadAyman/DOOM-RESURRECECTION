@@ -1,5 +1,6 @@
 #include<GL\glut.h>
-
+#include <iostream>
+using namespace std;
 
 
 // draws the shape i want. currently square.
@@ -45,7 +46,7 @@ int main (int argc, char** argv)
 	glutReshapeFunc (reshape);
 
 	background ();
-
+	cout << "test";
 //###################### END CALL BACK FUNCTION. ######################################
 
 	// MAIN LOOP. 
