@@ -16,7 +16,7 @@ void background ();
 int main (int argc, char** argv)
 {
 // #################### INITIALIZE GLUT LIBRARY. ###########################
-
+	cout << "testingg";
 	/* We use the '&' operator here because we want the glut function to change the actuall value of the argc parameter,
 	it needs to have access to the original memory location of the argument,not just a copy of its value.  */
 	glutInit (&argc, argv);
