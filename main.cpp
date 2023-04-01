@@ -56,9 +56,31 @@ public:
 
 int main (int argc, char** argv)
 {
+
 	glutInit (&argc, argv);
 	Game game;
 
 	game.Run ();
 }
 
+
+void draw ()
+{
+	glClear (GL_COLOR_BUFFER_BIT);
+	glLoadIdentity ();
+	glFlush ();
+}
+
+void reshape (int w, int h)
+{	
+	glViewport (0, 0, w, h);
+	glMatrixMode (GL_PROJECTION);
+	glLoadIdentity ();
+	gluOrtho2D (-10, 10, -10, 10);
+	glMatrixMode (GL_MODELVIEW);
+}
+
+void background ()
+{
+	glClearColor (0, 0, 0, 1);
+}
