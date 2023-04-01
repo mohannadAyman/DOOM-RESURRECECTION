@@ -56,37 +56,9 @@ public:
 
 int main (int argc, char** argv)
 {
-<<<<<<< Updated upstream
-// #################### INITIALIZE GLUT LIBRARY. ###########################
-	cout << "testingg";
-	/* We use the '&' operator here because we want the glut function to change the actuall value of the argc parameter,
-	it needs to have access to the original memory location of the argument,not just a copy of its value.  */
-=======
->>>>>>> Stashed changes
 	glutInit (&argc, argv);
 	Game game;
 
 	game.Run ();
 }
 
-
-void draw ()
-{
-	glClear (GL_COLOR_BUFFER_BIT);
-	glLoadIdentity ();
-	glFlush ();
-}
-
-void reshape (int w, int h)
-{	
-	glViewport (0, 0, w, h);
-	glMatrixMode (GL_PROJECTION);
-	glLoadIdentity ();
-	gluOrtho2D (-10, 10, -10, 10);
-	glMatrixMode (GL_MODELVIEW);
-}
-
-void background ()
-{
-	glClearColor (0, 0, 0, 1);
-}
