@@ -127,13 +127,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Gui.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="map.cpp" />
-    <ClCompile Include="pathfinding.cpp" />
-    <ClCompile Include="raycast algo.cpp" />
-    <ClCompile Include="settings.cpp" />
-    <ClCompile Include="sound.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Gui.h" />
+    <ClInclude Include="Map.h" />
+    <ClInclude Include="PathFinding.h" />
+    <ClInclude Include="RayCast.h" />
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="Sound.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
