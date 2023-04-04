@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Settings.h"
 #include <Windows.h>
+
+#include "Map.h"
 #include<GL\glut.h>
 
 
@@ -12,22 +14,27 @@ class Game
 {
 public:
 
+	static Map map;
+
 	Game ()
 	{
+		
 		float delta_time = 1;
 		glutInitDisplayMode (GLUT_RGB | GLUT_SINGLE);
 		glutInitWindowSize (WIDTH, HEIGHT);
-		glutInitWindowPosition (10, 10);
+		glutInitWindowPosition (0, 0);
 		glutCreateWindow ("Studying Cg");
-		glutDisplayFunc (draw);
+		glutDisplayFunc (new_game);
 		glutReshapeFunc (reshape);
 		background ();
 
 		
 	};
 
-	void new_game ()
+	 static void new_game ()
 	{
+		
+		map.draw();
 	};
 
 	void Update ()
@@ -53,7 +60,7 @@ public:
 	};
 
 };
-
+Map Game::map;
 int main (int argc, char** argv)
 {
 
@@ -73,10 +80,26 @@ void draw ()
 
 void reshape (int w, int h)
 {	
+	float ratio;
+	if (h == 0)
+	{
+		h = 1;
+	}
+	ratio = (float)w / h;
+
 	glViewport (0, 0, w, h);
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity ();
-	gluOrtho2D (-10, 10, -10, 10);
+	//if (w >= h)
+	//{
+		gluOrtho2D (0, w, 0, h);
+		cout << "width is here: " << h;
+	//}
+	//else
+	//{
+	//	gluOrtho2D (-10, 10, -10/ratio, 10/ratio);
+	//}
+	
 	glMatrixMode (GL_MODELVIEW);
 }
 
