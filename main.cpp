@@ -6,7 +6,6 @@
 #include<GL\glut.h>
 
 
-void draw ();
 void reshape (int, int);
 void background ();
 
@@ -71,13 +70,6 @@ int main (int argc, char** argv)
 }
 
 
-void draw ()
-{
-	glClear (GL_COLOR_BUFFER_BIT);
-	glLoadIdentity ();
-	glFlush ();
-}
-
 void reshape (int w, int h)
 {	
 	float ratio;
@@ -92,7 +84,7 @@ void reshape (int w, int h)
 	glLoadIdentity ();
 	//if (w >= h)
 	//{
-		gluOrtho2D (0, w, 0, h);
+		gluOrtho2D (0, 16, 0, 9);
 		cout << "width is here: " << h;
 	//}
 	//else
@@ -100,7 +92,7 @@ void reshape (int w, int h)
 	//	gluOrtho2D (-10, 10, -10/ratio, 10/ratio);
 	//}
 	
-	glMatrixMode (GL_MODELVIEW);
+	
 }
 
 void background ()
