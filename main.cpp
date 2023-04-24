@@ -78,7 +78,7 @@ void reshape (int w, int h)
 		h = 1;
 	}
 	ratio = (float)w / h;
-
+	cout << "hello world";
 	glViewport (0, 0, w, h);
 	glMatrixMode (GL_PROJECTION);
 	glLoadIdentity ();
