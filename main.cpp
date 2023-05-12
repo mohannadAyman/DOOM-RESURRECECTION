@@ -1,101 +1,47 @@
 #include <iostream>
-#include "Settings.h"
-#include <Windows.h>
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
-#include "Map.h"
-#include<GL\glut.h>
+using namespace std;
 
-
-void reshape (int, int);
-void background ();
-
-class Game
+int main ()
 {
-public:
+	glfwInit ();
 
-	static Map map;
+	// choosing the version 3.3
+	glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, 3);
 
-	Game ()
+	// There are 2 glfw packages. Here we are using modern package in.
+	
+	glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+	GLFWmonitor*  monitor = glfwGetPrimaryMonitor ();
+	GLFWwindow* window = glfwCreateWindow (800, 800, "DOOM RESURRECTION", NULL, NULL);
+
+	if (window == NULL)
 	{
-		
-		float delta_time = 1;
-		glutInitDisplayMode (GLUT_RGB | GLUT_SINGLE);
-		glutInitWindowSize (WIDTH, HEIGHT);
-		glutInitWindowPosition (0, 0);
-		glutCreateWindow ("Studying Cg");
-		glutDisplayFunc (new_game);
-		glutReshapeFunc (reshape);
-		background ();
-
-		
-	};
-
-	 static void new_game ()
-	{
-		
-		map.draw();
-	};
-
-	void Update ()
-	{
-		
-	};
-
-	void Draw ()
-	{
-		glClear (GL_COLOR_BUFFER_BIT);
-		glLoadIdentity ();
-		glFlush ();
-	};
-
-	void Check_Events ()
-	{
-	};
-
-	void Run ()
-	{
-
-		glutMainLoop ();
-	};
-
-};
-Map Game::map;
-int main (int argc, char** argv)
-{
-
-	glutInit (&argc, argv);
-	Game game;
-
-	game.Run ();
-}
-
-
-void reshape (int w, int h)
-{	
-	float ratio;
-	if (h == 0)
-	{
-		h = 1;
+		cout << "error " << endl;
+		glfwTerminate ();
+		return -1;
 	}
-	ratio = (float)w / h;
-	cout << "hello world";
-	glViewport (0, 0, w, h);
-	glMatrixMode (GL_PROJECTION);
-	glLoadIdentity ();
-	//if (w >= h)
-	//{
-		gluOrtho2D (0, 16, 0, 9);
-		cout << "width is here: " << h;
-	//}
-	//else
-	//{
-	//	gluOrtho2D (-10, 10, -10/ratio, 10/ratio);
-	//}
-	
-	
-}
 
-void background ()
-{
-	glClearColor (0, 0, 0, 1);
+	// after creating the windows, you must tell glfw to show it on the screen.
+	glfwMakeContextCurrent (window);
+
+	gladLoadGL (); 
+
+	glViewport (0, 0, 800, 800);
+	glClearColor (0.07f, 0.13f, 0.17f, 1.0f);
+	glClear (GL_COLOR_BUFFER_BIT);
+	glfwSwapBuffers (window);
+
+	while (!glfwWindowShouldClose (window))
+	{
+		glfwPollEvents ();
+	}
+
+	glfwDestroyWindow (window);
+	glfwTerminate ();
+	return 0;
 }
