@@ -1,8 +1,56 @@
 #include <iostream>
+#include  <vector>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-
+#include <stb/stb_image.h>
+//#include "Map.h"
 using namespace std;
+const int ROWS = 9;
+const int COLS = 16;
+void draw(GLFWwindow* window)
+{
+    vector<vector<char>> arr =
+    {
+        {'1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
+        {'1', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '1'},
+        {'1', '-', '-', '1', '1', '1', '1', '-', '-', '-', '1', '1', '1', '-', '-', '1'},
+        {'1', '-', '-', '-', '-', '-', '1', '-', '-', '-', '-', '-', '1', '-', '-', '1'},
+        {'1', '-', '-', '-', '-', '-', '1', '-', '-', '-', '-', '-', '1', '-', '-', '1'},
+        {'1', '-', '-', '1', '1', '1', '1', '-', '-', '-', '-', '-', '-', '-', '-', '1'},
+        {'1', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '-', '1'},
+        {'1', '-', '-', '1', '-', '-', '-', '-', '1', '-', '-', '-', '-', '-', '-', '1'},
+        {'1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'}
+    };
+
+    glClear (GL_COLOR_BUFFER_BIT);
+    glMatrixMode (GL_PROJECTION);
+    glLoadIdentity ();
+
+    // Set up orthographic projection
+    glOrtho (0, COLS, 0, ROWS, -1, 1);
+
+    glMatrixMode (GL_MODELVIEW);
+    glLoadIdentity ();
+
+    glColor3f (0.5, 0.4, 0.3);
+
+    // Draw squares in positions of the '1's
+    for (int i = 0; i < ROWS; i++)
+    {
+        for (int j = 0; j < COLS; j++)
+        {
+            if (arr[i][j] == '1')
+            {
+                glRectf (j, (ROWS - i), ((j + 1)), ((ROWS - i - 1)));
+            }
+        }
+    }
+	glMatrixMode (GL_PROJECTION);
+}
+
+
+
+
 
 int main ()
 {
@@ -14,10 +62,10 @@ int main ()
 
 	// There are 2 glfw packages. Here we are using modern package in.
 	
-	glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 
 	GLFWmonitor*  monitor = glfwGetPrimaryMonitor ();
-	GLFWwindow* window = glfwCreateWindow (800, 800, "DOOM RESURRECTION", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow (1600, 900, "DOOM RESURRECTION", NULL, NULL);
 
 	if (window == NULL)
 	{
@@ -25,19 +73,41 @@ int main ()
 		glfwTerminate ();
 		return -1;
 	}
-
+	gladLoadGL ();
 	// after creating the windows, you must tell glfw to show it on the screen.
 	glfwMakeContextCurrent (window);
+	
+	// SPRITES
+	int widthimg, heightimg, colorch;
+	unsigned char* bytes = stbi_load ("C:/Users/user/Documents/GitHub/DOOM - RESURRECECTION/resources/sprites/weapon/shotgun/0.png", &widthimg, &heightimg, &colorch,0);
 
-	gladLoadGL (); 
+	GLuint texture;
+	glGenTextures (1, &texture);
+	glActiveTexture (GL_TEXTURE0);
+	glBindTexture (GL_TEXTURE_2D, texture);
 
-	glViewport (0, 0, 800, 800);
-	glClearColor (0.07f, 0.13f, 0.17f, 1.0f);
-	glClear (GL_COLOR_BUFFER_BIT);
+	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+
+	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+
+	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, widthimg, heightimg, colorch, 0,GL_RGBA, GL_UNSIGNED_BYTE, bytes);
+
+	
+	int width, height;
+	glfwGetFramebufferSize (window, &width, &height);
+	glViewport (0, 0, width, height);
+	
 	glfwSwapBuffers (window);
 
 	while (!glfwWindowShouldClose (window))
 	{
+
+		//draw (window);
+		glfwSwapBuffers (window);
 		glfwPollEvents ();
 	}
 
@@ -45,3 +115,4 @@ int main ()
 	glfwTerminate ();
 	return 0;
 }
+

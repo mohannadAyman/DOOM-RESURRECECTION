@@ -2,7 +2,6 @@
 #include <vector>
 //#include "settings.h"
 #include<GL\glut.h>
-
 using namespace std;
 
 const int ROWS = 9;
@@ -31,7 +30,7 @@ public:
     void draw()
     {
         glClear(GL_COLOR_BUFFER_BIT);
-        glMatrixMode (GL_MODELVIEW);
+        
         glColor3f(.5, 0.4, 0.3);
         // draw squares in positions of the 1's
 
@@ -46,8 +45,6 @@ public:
                 }
             }
         }
-        //glMatrixMode (GL_PROJECTION);
-        glutSwapBuffers();
         glFlush ();
     }
 };
