@@ -1,13 +1,14 @@
 #include <iostream>
 #include  <vector>
+#include <stb/stb_image.h>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <stb/stb_image.h>
+
 //#include "Map.h"
 using namespace std;
 const int ROWS = 9;
 const int COLS = 16;
-void draw(GLFWwindow* window)
+void draw()
 {
     vector<vector<char>> arr =
     {
@@ -73,7 +74,7 @@ int main ()
 		glfwTerminate ();
 		return -1;
 	}
-	gladLoadGL ();
+	
 	// after creating the windows, you must tell glfw to show it on the screen.
 	glfwMakeContextCurrent (window);
 	
@@ -94,7 +95,7 @@ int main ()
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 
-	glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, widthimg, heightimg, colorch, 0,GL_RGBA, GL_UNSIGNED_BYTE, bytes);
+	//glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, widthimg, heightimg, colorch, 0,GL_RGBA, GL_UNSIGNED_BYTE, bytes);
 
 	
 	int width, height;
@@ -106,7 +107,7 @@ int main ()
 	while (!glfwWindowShouldClose (window))
 	{
 
-		//draw (window);
+		draw ();
 		glfwSwapBuffers (window);
 		glfwPollEvents ();
 	}

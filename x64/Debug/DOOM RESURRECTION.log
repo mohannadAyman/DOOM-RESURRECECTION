@@ -1,1 +1,8 @@
-﻿  stb.cpp
+﻿  main.cpp
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(36,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(45,63): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(45,45): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(45,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(45,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+main.obj : error LNK2019: unresolved external symbol stbi_load referenced in function main
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\x64\Debug\DOOM RESURRECTION.exe : fatal error LNK1120: 1 unresolved externals
