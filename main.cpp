@@ -1,8 +1,14 @@
 #include <iostream>
-#include  <vector>
-#include <stb/stb_image.h>
+#include <vector>
+#include <sstream>
+#include <string>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#define STB_IMAGE_IMPLEMENATION
+#include <stb/stb_image.h>
 
 //#include "Map.h"
 using namespace std;
@@ -78,39 +84,66 @@ int main ()
 	// after creating the windows, you must tell glfw to show it on the screen.
 	glfwMakeContextCurrent (window);
 	
+	gladLoadGL ();
 	// SPRITES
 	int widthimg, heightimg, colorch;
-	unsigned char* bytes = stbi_load ("C:/Users/user/Documents/GitHub/DOOM - RESURRECECTION/resources/sprites/weapon/shotgun/0.png", &widthimg, &heightimg, &colorch,0);
+    
 
-	GLuint texture;
-	glGenTextures (1, &texture);
-	glActiveTexture (GL_TEXTURE0);
-	glBindTexture (GL_TEXTURE_2D, texture);
+    GLuint textures[6]; // Assuming you have 6 images (0.png to 5.png)
 
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+// Load and generate textures for each image
+    for (int i = 0; i <= 5; i++)
+    {
+        std::stringstream ss;
+        ss << R"(C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\resources\sprites\weapon\shotgun\)" << i << ".png";
+        std::string filePath = ss.str ();
 
+        // Load the image
+        int widthimg, heightimg, colorch;
+        unsigned char* bytes = stbi_load (filePath.c_str (), &widthimg, &heightimg, &colorch, 0);
 
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        // Generate a new texture
+        glGenTextures (1, &textures[i]);
+        glBindTexture (GL_TEXTURE_2D, textures[i]);
 
+        // Set texture parameters
+        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
+        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-	//glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, widthimg, heightimg, colorch, 0,GL_RGBA, GL_UNSIGNED_BYTE, bytes);
+        // Upload image data to the texture
+        glTexImage2D (GL_TEXTURE_2D, 0, GL_RGBA, widthimg, heightimg, 0, GL_RGBA, GL_UNSIGNED_BYTE, bytes);
+        glGenerateMipmap (GL_TEXTURE_2D);
 
-	
-	int width, height;
-	glfwGetFramebufferSize (window, &width, &height);
-	glViewport (0, 0, width, height);
-	
-	glfwSwapBuffers (window);
+        // Free the image data
+        stbi_image_free (bytes);
+    }
 
-	while (!glfwWindowShouldClose (window))
-	{
+    // ...
 
-		draw ();
-		glfwSwapBuffers (window);
-		glfwPollEvents ();
-	}
+    // Animation loop
+    while (!glfwWindowShouldClose (window))
+    {
+        glClear (GL_COLOR_BUFFER_BIT);
+
+        // Calculate the index of the current frame
+        int frameIndex = static_cast<int>(glfwGetTime ()) % 6; // Assuming 6 images (0.png to 5.png)
+
+        // Render the current frame
+        glEnable (GL_TEXTURE_2D);
+        glBindTexture (GL_TEXTURE_2D, textures[frameIndex]);
+        glBegin (GL_QUADS);
+        glTexCoord2f (0, 0); glVertex2f (-1, 1);
+        glTexCoord2f (1, 0); glVertex2f (1, 1);
+        glTexCoord2f (1, 1); glVertex2f (1, -1);
+        glTexCoord2f (0, 1); glVertex2f (-1, -1);
+        glEnd ();
+        glDisable (GL_TEXTURE_2D);
+
+        glfwSwapBuffers (window);
+        glfwPollEvents ();
+    }
 
 	glfwDestroyWindow (window);
 	glfwTerminate ();

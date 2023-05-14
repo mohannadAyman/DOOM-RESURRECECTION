@@ -1,8 +1,10 @@
 ﻿  main.cpp
-C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(36,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
-C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(45,63): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(45,45): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(45,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(45,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
-main.obj : error LNK2019: unresolved external symbol stbi_load referenced in function main
-C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\x64\Debug\DOOM RESURRECTION.exe : fatal error LNK1120: 1 unresolved externals
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(42,29): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(51,63): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(51,45): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(51,35): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(51,26): warning C4244: 'argument': conversion from 'int' to 'GLfloat', possible loss of data
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(89,16): warning C4101: 'heightimg': unreferenced local variable
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(89,6): warning C4101: 'widthimg': unreferenced local variable
+C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\main.cpp(89,27): warning C4101: 'colorch': unreferenced local variable
+  DOOM RESURRECTION.vcxproj -> C:\Users\user\Documents\GitHub\DOOM-RESURRECECTION\x64\Debug\DOOM RESURRECTION.exe
